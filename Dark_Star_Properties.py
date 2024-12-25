@@ -19,7 +19,6 @@ import matplotlib.pyplot as plt
 # Assuming that a Dark Star is composed of purely Dark Matter, and that Dark
 # Matter has a temperature of 0 Kelvin
 
-
 ''' - - - - - Constants - - - - - '''
 g_spin = 2.0                    # g_s = 2; from Pauli exclusion principle
 # Planck's constant and the speed of light
@@ -33,4 +32,58 @@ h_bar_c = 197.327                           # Units: MeV-fm
 m_particle = 1000.0             # Units: MeV / c^2
 m_mediator = 10.0               # Units: MeV / c^2
 
-alpha = 1.0 * pow(10, -3)       # Yukawa's interaction coupling strength
+coupling_strength = 1.0 * pow(10, -3)   # Yukawa's interaction coupling strength
+
+
+''' - - - - - - - - Functions - - - - - - - - '''
+def Yukawa_force(m_chi, m_mu, alpha, x):
+    # Dark Star particle mass       - m_chi
+    # Field Mediator mass           - m_mu
+    # Interaction coupling strength - alpha
+
+    yukawa_potential = ((pow(g_spin, 2) * alpha * pow(m_chi, 6) * pow(x, 6)) /
+                        (18.0 * pow(np.pi, 3) * pow(m_mu, 2)))
+
+    return yukawa_potential
+
+
+def calculate_pressure_density(x, m_chi, m_mu, alpha):
+    # Dark Star particle mass       - m_chi
+    # Field Mediator mass           - m_mu
+    # Interaction coupling strength - alpha
+
+    sqrt_x = np.sqrt(1 + pow(x, 2))
+
+    # psi function [ψ] (Equation 7 within "Asymmetric dark matter stars")
+    psi = ((x * sqrt_x * (2 * (pow(x, 2) / 3) - 1) + np.log(x + sqrt_x)) /
+          (8.0 * pow(np.pi, 2)))
+
+    pressure_kinetic = (g_spin / 2) * pow(m_chi, 4) * psi
+
+    yukawa_potential = Yukawa_force(m_chi, m_mu, alpha, x)
+
+    pressure_density = (pressure_kinetic + yukawa_potential) / pow(h_bar_c, 3)
+
+    return pressure_density
+
+
+def calculate_energy_density(x, m_chi, m_mu, alpha):
+    # Dark Star particle mass       - m_chi
+    # Field Mediator mass           - m_mu
+    # Interaction coupling strength - alpha
+
+    sqrt_x = np.sqrt(1 + pow(x, 2))
+
+    # xi function [ξ] (Equation 6 within "Asymmetric dark matter stars")
+    xi = ((x * sqrt_x * (1 + 2 * pow(x, 2)) - np.log(x + sqrt_x)) /
+           (8.0 * pow(np.pi, 2)))
+
+    energy_kinetic = (g_spin / 2) * pow(m_chi, 4) * xi
+
+    yukawa_potential = Yukawa_force(m_chi, m_mu, alpha, x)
+
+    energy_density = (energy_kinetic + yukawa_potential) / pow(h_bar_c, 3)
+
+    return energy_density
+
+
