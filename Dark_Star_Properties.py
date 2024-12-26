@@ -28,12 +28,6 @@ speed_light = 3.00 * pow(10, 8)             # Units: m/s
 # Reduced Planck's constant [h bar] times the speed of light
 h_bar_c = 197.327                           # Units: MeV-fm
 
-# Dark Star particle mass and Field Mediator mass
-m_particle = 1000.0             # Units: MeV / c^2
-m_mediator = 10.0               # Units: MeV / c^2
-
-coupling_strength = 1.0 * pow(10, -3)   # Yukawa's interaction coupling strength
-
 
 ''' - - - - - - - - Functions - - - - - - - - '''
 def Yukawa_force(m_chi, m_mu, alpha, x):
@@ -62,9 +56,10 @@ def calculate_pressure_density(x, m_chi, m_mu, alpha):
 
     yukawa_potential = Yukawa_force(m_chi, m_mu, alpha, x)
 
-    pressure_density = (pressure_kinetic + yukawa_potential) / pow(h_bar_c, 3)
+    pressure_density_calculated = np.array((pressure_kinetic + yukawa_potential)
+                                / pow(h_bar_c, 3))
 
-    return pressure_density
+    return pressure_density_calculated
 
 
 def calculate_energy_density(x, m_chi, m_mu, alpha):
@@ -82,8 +77,55 @@ def calculate_energy_density(x, m_chi, m_mu, alpha):
 
     yukawa_potential = Yukawa_force(m_chi, m_mu, alpha, x)
 
-    energy_density = (energy_kinetic + yukawa_potential) / pow(h_bar_c, 3)
+    energy_density_calculated = np.array((energy_kinetic + yukawa_potential)
+                              / pow(h_bar_c, 3))
 
-    return energy_density
+    return energy_density_calculated
+
+
+def dark_star_mass_radius(energy_density_array, pressure_density_array):
+
+
+
+    # Initial Values / Dark Star Properties at center (or core)
+    initial_mass = 0.0
+    initial_energy = central_energy_density
+    initial_pressure = central_pressure_density
+
+
+    return initial_mass
+
+
+''' - - - - - - - - Explanation - - - - - - - - '''
+# x is a measure of how relativistic a particle is (how much their behavior is
+# influenced by the principles of Einstein's theory of relativity)
+#       >> Non-relativistic particle - particle moves much slower than the
+#       speed of light. Behavior can be described using classical physics
+#       >> Relativistic particle - particle moves at speeds close to the speed
+#       of light. Behavior is affected by relativity [time and space behave
+#       differently for relativistic particles]
+# x = 0 [particle is at rest];          x > 1 [particle is non-relativistic]
+# x ≈ 1 [particle is relativistic; moves at significant fraction of speed of light]
+# x > 1 [particle is highly relativistic; moves close to the speed of light]
+
+# Array of values that to test non-relativistic and relativistic behavior
+relativity_parameter = np.arange(0.01, 2.00, 0.001)
+
+# Dark Star particle mass and Field Mediator mass
+m_particle = 1000.0             # Units: MeV / c^2
+m_mediator = 10.0               # Units: MeV / c^2
+
+coupling_strength = 1.0 * pow(10, -3)   # Yukawa's interaction coupling strength
+
+''' - - - - - - - - Main Code - - - - - - - - '''
+
+pressure_density \
+    = calculate_pressure_density(x=relativity_parameter, m_chi=m_particle,
+                                 m_mu=m_mediator, alpha=coupling_strength)
+
+energy_density \
+    = calculate_energy_density(x=relativity_parameter, m_chi=m_particle,
+                               m_mu=m_mediator, alpha=coupling_strength)
+
 
 
