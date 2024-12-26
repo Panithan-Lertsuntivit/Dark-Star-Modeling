@@ -22,8 +22,9 @@ import matplotlib.pyplot as plt
 ''' - - - - - Constants - - - - - '''
 g_spin = 2.0                    # g_s = 2; from Pauli exclusion principle
 # Planck's constant and the speed of light
-Planck_constant = 4.136 * pow(10, -15)      # Units: eV-s
-speed_light = 2.99792458 * pow(10, 8)       # Units: m/s
+Planck_constant = 4.136 * pow(10, -15)          # Units: eV-s
+speed_light = 2.99792458 * pow(10, 8)           # Units: m/s
+speed_light_fm = speed_light * pow(10, 15)      # Units: fm/s
 
 # Reduced Planck's constant [h bar] times the speed of light
 h_bar_c = 197.327                           # Units: MeV-fm
@@ -31,7 +32,8 @@ h_bar_c = 197.327                           # Units: MeV-fm
 # Gravitational constant
 gravitational_constant = 6.67430 * pow(10, -11)     # Units: m^3 / (kg-s^2)
 G_with_c_squared = 1.189763 * pow(10, 5)    # Units: (fm^3 - c^2) / (MeV-s^2)
-G = G_with_c_squared / pow(speed_light, 2)          # Units: fm^3 / (MeV-s^2)
+# G / c^2 has units of (fm - c^2) / (MeV)
+G_divide_c_squared = G_with_c_squared / pow(speed_light_fm, 2)
 
 ''' - - - - - - - - Functions - - - - - - - - '''
 def Yukawa_force(m_chi, m_mu, alpha, x):
@@ -91,32 +93,61 @@ def calculate_energy_density(x, m_chi, m_mu, alpha):
     return energy_density_calculated
 
 
-def dark_star_mass_radius(energy_density_array, pressure_density_array):
+def dark_star_mass_radius(energydensity, pressuredensity):
     # Initializing array for storing Dark Star mass and radius values
     darkstar_mass = []
     darkstar_radius = []
 
-    # Constant Values
-
-
     # Will be looping through each pressure density value given. Each pressure
     # density value is used as the central pressure for that dark star
-    for i, central_pressure in enumerate(pressure_density_array):
+    for i, central_pressure in enumerate(pressuredensity):
         # Initial Values / Dark Star Properties at its core
         initial_mass = 0.0
-        initial_energy = energy_density_array[i]
+        initial_energy = energydensity[i]
         initial_pressure = central_pressure
         radial_step = 1.0 * pow(10, 17)             # Units in fm [femto-meter]
 
-        # Current Values
+        # Current [i] / Next [i + 1] Values
         # Energy and Pressure have Non-Natural Units of MeV / (fm^3 - c^8)
-        current_energy = initial_energy         # Natural Units: MeV / (fm^3)
-        current_pressure = initial_pressure     # Natural Units: MeV / (fm^3)
+        energy_i = initial_energy         # Natural Units: MeV / (fm^3)
+        pressure_i = initial_pressure     # Natural Units: MeV / (fm^3)
 
         # Non-Natural Units: Mass [MeV / c^8] and Radius [fm]
-        current_mass = initial_mass             # Natural Units: MeV / c^2
-        current_radius = radial_step            # Natural Units: fm
+        mass_i = initial_mass             # Natural Units: MeV / c^2
 
+        next_radius = radial_step               # Natural Units: fm
+
+        while (pressure_i > 0):
+            # Using TOV equations to calculate the next mass and pressure values
+            # Mass [Non-Natural Units: MeV/c^8] [Natural Units: MeV/c^2]
+            next_mass = mass_i + (4 * np.pi * pow(next_radius, 2)
+                                        * energy_i * radial_step)
+
+            # Pressure [Non-Natural: MeV/(fm^3-c^8)] [Natural: MeV/fm^3]
+            next_pressure \
+                = (pressure_i - ((energy_i + pressure_i) * (
+                    mass_i + 4 * np.pi * pow(next_radius, 3) * pressure_i) * (
+                    G_divide_c_squared * radial_step)) / (
+                    pow(next_radius, 2) *
+                    (1 - (2 * G_divide_c_squared * mass_i)/next_radius)))
+
+            if (next_pressure <= 0):
+                # Converting to SI Units
+                star_mass_kg = (next_mass * pow(speed_light, 6) *
+                             (1.602 * pow(10, -13)))
+                star_radius_km = next_radius / pow(10, 18)
+
+                # Saving to initialized array
+                darkstar_mass.append(star_mass_kg)
+                darkstar_radius.append(star_radius_km)
+
+            else:
+                # Updating Values
+                mass_i = next_mass
+                pressure_i = next_pressure
+                next_radius = next_radius + radial_step
+                # Linear Interpolation for energy density
+                energy_i = np.interp(pressure_i, pressuredensity, energydensity)
 
     return darkstar_mass, darkstar_radius
 
