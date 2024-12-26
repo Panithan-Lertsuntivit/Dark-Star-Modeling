@@ -117,7 +117,9 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 
         next_radius = radial_step               # Natural Units: fm
 
-        while (pressure_i > 0):
+        counter = 1
+
+        while (counter > 0):
             # Using TOV equations to calculate the next mass and pressure values
             # Mass [Non-Natural Units: MeV/c^8] [Natural Units: MeV/c^2]
             next_mass = mass_i + (4 * np.pi * pow(next_radius, 2)
@@ -133,13 +135,15 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 
             if (next_pressure <= 0):
                 # Converting to SI Units
-                star_mass_kg = (next_mass * pow(speed_light, 6) *
+                star_mass_kg = (next_mass / pow(speed_light, 2) *
                              (1.602 * pow(10, -13)))
                 star_radius_km = next_radius / pow(10, 18)
 
                 # Saving to initialized array
                 darkstar_mass.append(star_mass_kg)
                 darkstar_radius.append(star_radius_km)
+                print(star_mass_kg)
+                counter = 0
 
             else:
                 # Updating Values
@@ -183,5 +187,12 @@ energy_density \
     = calculate_energy_density(x=relativity_parameter, m_chi=m_particle,
                                m_mu=m_mediator, alpha=coupling_strength)
 
+[dark_star_mass, dark_star_radius] \
+    = dark_star_mass_radius(energydensity=energy_density,
+                            pressuredensity=pressure_density)
 
+max_mass = max(dark_star_mass)
 
+solar_mass = 1.989 * pow(10, 30)
+
+print(max_mass/solar_mass)
