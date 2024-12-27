@@ -16,8 +16,12 @@ import matplotlib.pyplot as plt
 #       The mass of the Field Mediator is notated as m_mediator
 #       The Interaction Coupling Strength is notated as alpha
 #
-# Assuming that a Dark Star is composed of purely Dark Matter, and that Dark
-# Matter has a temperature of 0 Kelvin
+# Assuming that a Dark Star is composed of purely Dark Matter.
+# Additionally, we are assuming that Dark Matter is nonbaryonic [it is "cold",
+# and move nonrelativitically in the early universe] and only has weak
+# interactions with other matter through gravity.
+# Since Dark Matter is nonbaryonic, it has a temperature of 0 Kelvin
+
 
 ''' - - - - - Constants - - - - - '''
 g_spin = 2.0                    # g_s = 2; from Pauli exclusion principle
@@ -37,20 +41,23 @@ G_divide_c_squared = G_with_c_squared / pow(speed_light_fm, 2)
 
 ''' - - - - - - - - Functions - - - - - - - - '''
 def Yukawa_force(m_chi, m_mu, alpha, x):
-    # Dark Star particle mass       - m_chi
-    # Field Mediator mass           - m_mu
-    # Interaction coupling strength - alpha
+    # Input [Natural Units] -> Output [Natural Units]
+    # Dark Star particle mass       - m_chi     [Natural Units: MeV]
+    # Field Mediator mass           - m_mu      [Natural Units: MeV]
+    # Interaction coupling strength - alpha     [Unitless]
 
     yukawa_potential = ((pow(g_spin, 2) * alpha * pow(m_chi, 6) * pow(x, 6)) /
                         (18.0 * pow(np.pi, 3) * pow(m_mu, 2)))
+    # Yukawa potential [Natural Units: MeV]
 
     return yukawa_potential
 
 
 def calculate_pressure_density(x, m_chi, m_mu, alpha):
-    # Dark Star particle mass       - m_chi
-    # Field Mediator mass           - m_mu
-    # Interaction coupling strength - alpha
+    # Input [Natural Units] -> Output [Natural Units]
+    # Dark Star particle mass       - m_chi     [Natural Units: MeV]
+    # Field Mediator mass           - m_mu      [Natural Units: MeV]
+    # Interaction coupling strength - alpha     [Unitless]
 
     sqrt_x = np.sqrt(1 + pow(x, 2))
 
@@ -64,16 +71,16 @@ def calculate_pressure_density(x, m_chi, m_mu, alpha):
 
     pressure_density_calculated = np.array((pressure_kinetic + yukawa_potential)
                                 / pow(h_bar_c, 3))
-    # Natural Units: MeV / fm^3
-    # Non-Natural Units: MeV / (fm^3 - c^8)
+    # Natural Units: [MeV / fm^3]
 
     return pressure_density_calculated
 
 
 def calculate_energy_density(x, m_chi, m_mu, alpha):
-    # Dark Star particle mass       - m_chi
-    # Field Mediator mass           - m_mu
-    # Interaction coupling strength - alpha
+    # Input [Natural Units] -> Output [Natural Units]
+    # Dark Star particle mass       - m_chi     [Natural Units: MeV]
+    # Field Mediator mass           - m_mu      [Natural Units: MeV]
+    # Interaction coupling strength - alpha     [Unitless]
 
     sqrt_x = np.sqrt(1 + pow(x, 2))
 
@@ -88,12 +95,12 @@ def calculate_energy_density(x, m_chi, m_mu, alpha):
     energy_density_calculated = np.array((energy_kinetic + yukawa_potential)
                               / pow(h_bar_c, 3))
     # Natural Units: MeV / fm^3
-    # Non-Natural Units: MeV / (fm^3 - c^8)
 
     return energy_density_calculated
 
 
 def dark_star_mass_radius(energydensity, pressuredensity):
+    # Input [Natural Units] -> Output [Non-Natural Units / SI Units]
     # Initializing array for storing Dark Star mass and radius values
     darkstar_mass = []
     darkstar_radius = []
@@ -108,24 +115,21 @@ def dark_star_mass_radius(energydensity, pressuredensity):
         radial_step = 1.0 * pow(10, 17)             # Units in fm [femto-meter]
 
         # Current [i] / Next [i + 1] Values
-        # Energy and Pressure have Non-Natural Units of MeV / (fm^3 - c^8)
-        energy_i = initial_energy         # Natural Units: MeV / (fm^3)
-        pressure_i = initial_pressure     # Natural Units: MeV / (fm^3)
+        energy_i = initial_energy           # Natural Units: MeV / (fm^3)
+        pressure_i = initial_pressure       # Natural Units: MeV / (fm^3)
 
-        # Non-Natural Units: Mass [MeV / c^8] and Radius [fm]
-        mass_i = initial_mass             # Natural Units: MeV / c^2
-
-        next_radius = radial_step               # Natural Units: fm
+        mass_i = initial_mass               # Natural Units: MeV
+        next_radius = radial_step           # Natural Units: fm
 
         counter = 1
 
         while (counter > 0):
             # Using TOV equations to calculate the next mass and pressure values
-            # Mass [Non-Natural Units: MeV/c^8] [Natural Units: MeV/c^2]
+            # Mass [Natural Units: MeV]
             next_mass = mass_i + (4 * np.pi * pow(next_radius, 2)
-                                        * energy_i * radial_step)
+                                  * energy_i * radial_step)
 
-            # Pressure [Non-Natural: MeV/(fm^3-c^8)] [Natural: MeV/fm^3]
+            # Pressure [Natural: MeV/fm^3]
             next_pressure \
                 = (pressure_i - ((energy_i + pressure_i) * (
                     mass_i + 4 * np.pi * pow(next_radius, 3) * pressure_i) * (
@@ -134,24 +138,29 @@ def dark_star_mass_radius(energydensity, pressuredensity):
                     (1 - (2 * G_divide_c_squared * mass_i)/next_radius)))
 
             if (next_pressure <= 0):
-                # Converting to SI Units
+                # Converting from Natural to Non-Natural Units
+                # Mass: [MeV] -> [MeV/c^2] -> [J/c^2] = [(N-m)/(m/s)^2] = [kg]
                 star_mass_kg = (next_mass / pow(speed_light, 2) *
                              (1.602 * pow(10, -13)))
+                # Radius: [fm] -> [km]
                 star_radius_km = next_radius / pow(10, 18)
 
                 # Saving to initialized array
                 darkstar_mass.append(star_mass_kg)
                 darkstar_radius.append(star_radius_km)
-                print(star_mass_kg)
-                counter = 0
+                # print(star_mass_kg)
+                # Changing counter to exit while loop
+                counter = -1
 
             else:
-                # Updating Values
+                # Updating Values (for next iteration)
                 mass_i = next_mass
                 pressure_i = next_pressure
                 next_radius = next_radius + radial_step
                 # Linear Interpolation for energy density
                 energy_i = np.interp(pressure_i, pressuredensity, energydensity)
+
+    # Output is in Non-Natural Units [mass = kg; radius = km]
 
     return darkstar_mass, darkstar_radius
 
@@ -171,14 +180,18 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 # Array of values that to test non-relativistic and relativistic behavior
 relativity_parameter = np.arange(0.01, 2.00, 0.001)
 
-# Dark Star particle mass and Field Mediator mass
-m_particle = 1000.0             # Units: MeV / c^2
-m_mediator = 10.0               # Units: MeV / c^2
+# Dark Star particle mass and Field Mediator mass values
+# [Natural Units: MeV]      [Non-Natural Units: MeV/c^2]
+m_particle = 1000.0
+m_mediator = 10.0
 
-coupling_strength = 1.0 * pow(10, -3)   # Yukawa's interaction coupling strength
+# Yukawa's Interaction Coupling Strength [Unitless]
+coupling_strength = 1.0 * pow(10, -3)
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
 
+# When calculating the pressure and energy density, the inputs are in Natural
+# Units and the output is in Natural Units
 pressure_density \
     = calculate_pressure_density(x=relativity_parameter, m_chi=m_particle,
                                  m_mu=m_mediator, alpha=coupling_strength)
@@ -187,6 +200,8 @@ energy_density \
     = calculate_energy_density(x=relativity_parameter, m_chi=m_particle,
                                m_mu=m_mediator, alpha=coupling_strength)
 
+# When calculating the dark star mass and radius, the inputs are in Natural
+# Units but the output is in Non-Natural Units [SI Units]
 [dark_star_mass, dark_star_radius] \
     = dark_star_mass_radius(energydensity=energy_density,
                             pressuredensity=pressure_density)
