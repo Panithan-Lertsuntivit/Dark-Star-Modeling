@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import itertools
 
 ''' - - - - - - - - - - Initial Notes / Assumptions - - - - - - - - - - '''
@@ -188,11 +189,11 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 # x > 1 [particle is highly relativistic; moves close to the speed of light]
 
 # Array of values that to test non-relativistic and relativistic behavior
-relativity_parameter = np.arange(0.01, 2.00, 0.01)
+relativity_parameter = np.arange(0.01, 1.50, 0.01)
 
 # Dark Star particle mass and Field Mediator mass values
-m_chi_values = [1000.0]     # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
-m_mu_values = [10.0]        # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
+m_chi_values = [1000]     # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
+m_mu_values = [10]        # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
 alpha_values = [1.0 * pow(10, -3)]
@@ -201,15 +202,20 @@ alpha_values = [1.0 * pow(10, -3)]
 for coupling_strength, m_particle, m_mediator in \
         itertools.product(alpha_values, m_chi_values, m_mu_values):
 
-    # Initialize pandas DataFrame and create description
+    # Initialize pandas DataFrame
     dark_star = pd.DataFrame()
     dark_star['Radius'] = ''
     dark_star['Mass'] = ''
     dark_star['SolarMass'] = ''
     dark_star['Comments'] = ''
 
-    description = (f"chi_{m_particle}MeV mu_{m_mediator}MeV "
-                   f"alpha_{coupling_strength}")
+    # Description and save location
+    mass_particle_GeV = int(m_particle/1000)
+    description = (f"chi_{mass_particle_GeV}GeV mu_{m_mediator}MeV "
+                   f"alpha_{coupling_strength:.0e}")
+
+    csv_folder = "results_csv"
+    save_path = f"{csv_folder}/{description}.csv"
 
     # When calculating the pressure and energy density, the inputs are in
     # Natural Units and the output is in Natural Units
@@ -233,11 +239,21 @@ for coupling_strength, m_particle, m_mediator in \
     dark_star['SolarMass'] = pd.Series(dark_star_solarmass)
 
     # Commments about the values
-    dark_star.loc[1, 'Comments'] = f"m_chi = {m_particle} MeV"
+    dark_star.loc[1, 'Comments'] = f"m_chi = {mass_particle_GeV} GeV"
     dark_star.loc[3, 'Comments'] = f"m_mu = {m_mediator} MeV"
     dark_star.loc[5, 'Comments'] = f"alpha = {coupling_strength}"
 
-    print(dark_star)
+    # Saving results to csv file
+    dark_star.to_csv(save_path, index=False)
+    print(f"Saved results to: {save_path}")
+
+    plt.plot(dark_star_radius, dark_star_solarmass)
+
+    plt.title("Dark Star Masses vs Dark Star Radii")
+    plt.xlabel("Dark Star Radii [km]")
+    plt.ylabel(r"Dark Star Mass [M$_{\odot}$]")
+
+    plt.show()
 
 
 '''
