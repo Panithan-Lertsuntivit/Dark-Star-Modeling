@@ -176,16 +176,35 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 
     return darkstar_radius, darkstar_mass, darkstar_solarmass
 
+
 def filtering(unfiltered_radius, unfiltered_mass, unfiltered_solarmass):
     # Filtering out data points that don't align with the expected pattern
 
     """ Stage 1 - Filtering out low mass values """
     solarmass_tolerance = 0.01
-    low_mass_filter_idx = (np.array(unfiltered_solarmass) > solarmass_tolerance)
+    low_mass_filter_idx = (unfiltered_solarmass > solarmass_tolerance)
 
-    radius_filtered = unfiltered_radius[low_mass_filter_idx]
-    mass_filtered = unfiltered_mass[low_mass_filter_idx]
-    solarmass_filtered = unfiltered_solarmass[low_mass_filter_idx]
+    # Applying the first filtering
+    radius_filter1 = unfiltered_radius[low_mass_filter_idx]
+    mass_filter1 = unfiltered_mass[low_mass_filter_idx]
+    solarmass_filter1 = unfiltered_solarmass[low_mass_filter_idx]
+
+    """ Stage 2 - Filtering out unexpected pattern """
+    difference_array = np.diff(radius_filter1)
+    logic_array = difference_array > 0
+
+    unexpected_pattern_idx = np.where(logic_array == 1)[0]
+
+    if unexpected_pattern_idx.size == 0:
+        start_unexpected_pattern = -1
+    else:
+        # Add +1 to the result, because the difference array has (n - 1) terms
+        start_unexpected_pattern = unexpected_pattern_idx[0] + 1
+
+    # Applying second filtering
+    radius_filtered = radius_filter1[0:start_unexpected_pattern]
+    mass_filtered = mass_filter1[0:start_unexpected_pattern]
+    solarmass_filtered = solarmass_filter1[0:start_unexpected_pattern]
 
     return radius_filtered, mass_filtered, solarmass_filtered
 
