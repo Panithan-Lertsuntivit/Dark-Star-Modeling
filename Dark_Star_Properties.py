@@ -107,9 +107,9 @@ def calculate_energy_density(x, m_chi, m_mu, alpha):
 def dark_star_mass_radius(energydensity, pressuredensity):
     # Input [Natural Units] -> Output [Non-Natural Units / SI Units]
     # Initializing array for storing Dark Star mass and radius values
-    darkstar_radius = []
-    darkstar_mass = []
-    darkstar_solarmass = []
+    darkstar_radius = np.array([])
+    darkstar_mass = np.array([])
+    darkstar_solarmass = np.array([])
 
     # Will be looping through each pressure density value given. Each pressure
     # density value is used as the central pressure for that dark star
@@ -156,9 +156,10 @@ def dark_star_mass_radius(energydensity, pressuredensity):
                 star_radius_km = next_radius / pow(10, 18)
 
                 # Saving to initialized array
-                darkstar_mass.append(star_mass_kg)
-                darkstar_radius.append(star_radius_km)
-                darkstar_solarmass.append(star_solarmass)
+                darkstar_mass = np.append(darkstar_mass, [star_mass_kg])
+                darkstar_radius = np.append(darkstar_radius, [star_radius_km])
+                darkstar_solarmass = np.append(darkstar_solarmass,
+                                               [star_solarmass])
                 # print(star_mass_kg)
                 # Changing counter to exit while loop
                 counter = -1
@@ -174,6 +175,19 @@ def dark_star_mass_radius(energydensity, pressuredensity):
     # Output is in Non-Natural Units [mass = kg; radius = km]
 
     return darkstar_radius, darkstar_mass, darkstar_solarmass
+
+def filtering(unfiltered_radius, unfiltered_mass, unfiltered_solarmass):
+    # Filtering out data points that don't align with the expected pattern
+
+    """ Stage 1 - Filtering out low mass values """
+    solarmass_tolerance = 0.01
+    low_mass_filter_idx = (np.array(unfiltered_solarmass) > solarmass_tolerance)
+
+    radius_filtered = unfiltered_radius[low_mass_filter_idx]
+    mass_filtered = unfiltered_mass[low_mass_filter_idx]
+    solarmass_filtered = unfiltered_solarmass[low_mass_filter_idx]
+
+    return radius_filtered, mass_filtered, solarmass_filtered
 
 
 ''' - - - - - - - - Explanation - - - - - - - - '''
@@ -232,9 +246,15 @@ for coupling_strength, m_particle, m_mediator in \
 
     # When calculating the dark star mass and radius, the inputs are in Natural
     # Units but the output is in Non-Natural Units [SI Units]
-    [dark_star_radius, dark_star_mass, dark_star_solarmass] \
+    [orig_dark_star_radius, orig_dark_star_mass, orig_dark_star_solarmass] \
         = dark_star_mass_radius(energydensity=energy_density,
                                 pressuredensity=pressure_density)
+
+    # Filtering data points
+    [dark_star_radius, dark_star_mass, dark_star_solarmass] \
+        = filtering(unfiltered_radius=orig_dark_star_radius,
+                    unfiltered_mass=orig_dark_star_mass,
+                    unfiltered_solarmass=orig_dark_star_solarmass)
 
     # Saving to Dark Star radius and mass values to DataFrame
     dark_star['Radius'] = pd.Series(dark_star_radius)
