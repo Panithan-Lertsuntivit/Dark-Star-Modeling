@@ -189,14 +189,15 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 # x > 1 [particle is highly relativistic; moves close to the speed of light]
 
 # Array of values that to test non-relativistic and relativistic behavior
-relativity_parameter = np.arange(0.01, 1.50, 0.01)
+relativity_parameter = np.arange(0.01, 1.00, 0.01)
 
 # Dark Star particle mass and Field Mediator mass values
-m_chi_values = [1000]     # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
-m_mu_values = [10]        # [Natural Units: MeV]  [Non-Natural Units: MeV/c^2]
+# Mass Units: [Natural: MeV]        [Non-Natural: MeV/c^2]
+m_chi_values = [1000, 4000, 7000, 10000]
+m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
-alpha_values = [1.0 * pow(10, -3)]
+alpha_values = [1.0 * pow(10, -2), 1.0 * pow(10, -3), 1.0 * pow(10, -4)]
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
 for coupling_strength, m_particle, m_mediator in \
@@ -249,7 +250,7 @@ for coupling_strength, m_particle, m_mediator in \
 
     plt.plot(dark_star_radius, dark_star_solarmass)
 
-    plt.title("Dark Star Masses vs Dark Star Radii")
+    plt.title(description)
     plt.xlabel("Dark Star Radii [km]")
     plt.ylabel(r"Dark Star Mass [M$_{\odot}$]")
 
