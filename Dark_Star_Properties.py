@@ -189,15 +189,17 @@ def dark_star_mass_radius(energydensity, pressuredensity):
 # x > 1 [particle is highly relativistic; moves close to the speed of light]
 
 # Array of values that to test non-relativistic and relativistic behavior
-relativity_parameter = np.arange(0.01, 1.00, 0.01)
+relativity_parameter = np.arange(0.01, 1.00, 0.001)
 
 # Dark Star particle mass and Field Mediator mass values
 # Mass Units: [Natural: MeV]        [Non-Natural: MeV/c^2]
-m_chi_values = [1000, 4000, 7000, 10000]
+# m_chi_values = [1000, 4000, 7000, 10000]
+m_chi_values = [1000, 2000, 3000, 4000, 5000]
 m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
-alpha_values = [1.0 * pow(10, -2), 1.0 * pow(10, -3), 1.0 * pow(10, -4)]
+# alpha_values = [1.0 * pow(10, -2), 1.0 * pow(10, -3), 1.0 * pow(10, -4)]
+alpha_values = [1.0 * pow(10, -3)]
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
 for coupling_strength, m_particle, m_mediator in \
@@ -264,7 +266,7 @@ alpha = 10^-2; 10^-3; 10^-4
 
 Dark Star Mass
 # Maselli iterated through these values
-m_chi = 1 GeV, 2 GeV, . . . 9 GeV, 10 GeV       
+m_chi = 1 GeV, 2 GeV, 3 GeV, 4 GeV, 5 GeV     
 # Kouvaris - Keep alpha = 10^-3 and 10 MeV for mediator
 m_chi = 10 GeV, 100 GeV, 1 TeV          
 
