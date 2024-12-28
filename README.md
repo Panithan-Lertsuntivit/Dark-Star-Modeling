@@ -1,4 +1,4 @@
-# Dark-Star-Modeling
+# Dark Star Modeling
 
 Modeling Dark Matter clumping under various pressure and energy densities using the **Tolman-Oppenheimer-Volkoff equations**
 
