@@ -227,7 +227,7 @@ relativity_parameter = np.arange(0.01, 1.00, 0.001)
 # Dark Star particle mass and Field Mediator mass values
 # Mass Units: [Natural: MeV]        [Non-Natural: MeV/c^2]
 # m_chi_values = [1000, 4000, 7000, 10000]
-m_chi_values = [1000, 2000, 3000, 4000, 5000]
+m_chi_values = [1000, 2000, 3000]
 m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
@@ -247,11 +247,16 @@ for coupling_strength, m_particle, m_mediator in \
 
     # Description and save location
     mass_particle_GeV = int(m_particle/1000)
-    description = (f"chi_{mass_particle_GeV}GeV mu_{m_mediator}MeV "
-                   f"alpha_{coupling_strength:.0e}")
+    save_description = (f"chi_{mass_particle_GeV}GeV mu_{m_mediator}MeV "
+                        f"alpha_{coupling_strength:.0e}")
+    plot_description = (fr"$\chi$ = {mass_particle_GeV} GeV, "
+                        fr"$\mu$ = {m_mediator} MeV, "
+                        fr"$\alpha$ = {coupling_strength:0.0e}")
 
     csv_folder = "results_csv"
-    save_path = f"{csv_folder}/{description}.csv"
+    plot_folder = "results_plots"
+    csv_save_path = f"{csv_folder}/{save_description}.csv"
+    plot_save_path = f"{plot_folder}/{save_description}.png"
 
     # When calculating the pressure and energy density, the inputs are in
     # Natural Units and the output is in Natural Units
@@ -286,14 +291,21 @@ for coupling_strength, m_particle, m_mediator in \
     dark_star.loc[5, 'Comments'] = f"alpha = {coupling_strength}"
 
     # Saving results to csv file
-    dark_star.to_csv(save_path, index=False)
-    print(f"Saved results to: {save_path}")
+    dark_star.to_csv(csv_save_path, index=False)
+    print(f"Saved data point results to: {csv_save_path}")
 
+    # Plotting the result
     plt.plot(dark_star_radius, dark_star_solarmass)
 
-    plt.title(description)
+    # Title and labels
+    plt.title(plot_description)
     plt.xlabel("Dark Star Radii [km]")
-    plt.ylabel(r"Dark Star Mass [M$_{\odot}$]")
+    solarmass_symbol = r"M$_{\odot}$"
+    plt.ylabel(f"Dark Star Mass [{solarmass_symbol}]")
+
+    # Formatting and saving plot
+    plt.tight_layout()
+    plt.savefig(plot_save_path, dpi=300)
 
     plt.show()
 
