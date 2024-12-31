@@ -227,7 +227,7 @@ relativity_parameter = np.arange(0.01, 1.00, 0.001)
 # Dark Star particle mass and Field Mediator mass values
 # Mass Units: [Natural: MeV]        [Non-Natural: MeV/c^2]
 m_chi_values = [1000, 2000, 3000, 4000]
-m_mu_values = [6, 8, 10, 12, 14]
+m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
 alpha_values = [1.0 * pow(10, -3), 1.0 * pow(10, -4), 1.0 * pow(10, -5)]
