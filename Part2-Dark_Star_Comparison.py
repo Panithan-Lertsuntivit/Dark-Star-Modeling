@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import itertools
 
 
@@ -21,7 +22,7 @@ def maxSolarMass_fromcsv(folder_name, alpha_value, m_chi_values, m_mu_values):
     array_maxsolarmasses = np.zeros((rows, columns), dtype=float)
 
     # Sorting [increasing order] and Formatting values
-    chi_ordered_GeV = np.array(sorted(m_chi_values)) / 1000
+    chi_ordered_GeV = np.array(sorted(m_chi_values, reverse=True)) / 1000
     chi_formatted_GeV = chi_ordered_GeV.astype(int)
 
     mu_ordered_MeV = np.array(sorted(m_mu_values))
@@ -53,6 +54,25 @@ def maxSolarMass_fromcsv(folder_name, alpha_value, m_chi_values, m_mu_values):
             array_maxsolarmasses[i_idx, j_idx] = max_solarmass
 
     print(array_maxsolarmasses)
+
+    # Custom diverging normalization: Midpoint at 1
+    diverging_norm = mcolors.TwoSlopeNorm(vmin=0, vcenter=1, vmax=3)
+
+    # Creating a Heat map [figsize=(width, height)]
+    fig, ax = plt.subplots(figsize=(8, 9))
+
+    cax = ax.imshow(array_maxsolarmasses, cmap='RdBu', aspect='auto',
+                    norm=diverging_norm)
+    cbar = fig.colorbar(mappable=cax, ax=ax)
+    cbar.set_label(r"Solar Mass [M$_{\odot}$]")
+
+    ax.set_title("Max Solar Mass")
+    ax.set_xlabel("Mediator Mass")
+    ax.set_ylabel("Dark Matter Particle Mass")
+
+    plt.tight_layout()
+
+    plt.show()
 
     return 0
 
