@@ -55,7 +55,10 @@ def maxSolarMass_fromcsv(folder_name, alpha_value, m_chi_values, m_mu_values):
 
     print(array_maxsolarmasses)
 
-    # Custom diverging normalization: Midpoint at 1
+    # Custom diverging normalization: Midpoint at 1 [for 1 Solar Mass].
+    # Neutron stars with a solar mass of 1 are the minimum allowable mass
+    # according to some sources.
+    # The maximum is set to 3, to encapsulate the max result
     diverging_norm = mcolors.TwoSlopeNorm(vmin=0, vcenter=1, vmax=3)
 
     # Creating a Heat map [figsize=(width, height)]
@@ -66,9 +69,17 @@ def maxSolarMass_fromcsv(folder_name, alpha_value, m_chi_values, m_mu_values):
     cbar = fig.colorbar(mappable=cax, ax=ax)
     cbar.set_label(r"Solar Mass [M$_{\odot}$]")
 
-    ax.set_title("Max Solar Mass")
-    ax.set_xlabel("Mediator Mass")
-    ax.set_ylabel("Dark Matter Particle Mass")
+    # Title and Labels
+    # [x_axis = mediator (μ or \mu)] [y_axis = DM particle (χ or \chi)]
+    ax.set_title("Max Solar Mass", fontweight='bold', fontsize=14)
+    ax.set_xlabel(r"Field Mediator Mass (M$_{\mu}$) [MeV]")
+    ax.set_ylabel(r"Dark Matter Particle Mass (M$_{\chi}$) [GeV]")
+
+    # Tick marks
+    ax.set_xticks(range(len(mu_ordered_MeV)))
+    ax.set_xticklabels(mu_ordered_MeV)
+    ax.set_yticks(range(len(chi_ordered_GeV)))
+    ax.set_yticklabels(chi_ordered_GeV)
 
     plt.tight_layout()
 
@@ -83,7 +94,8 @@ m_chi_values = [1000, 2000, 3000, 4000]
 m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
-alpha_values = [1.0 * pow(10, -3), 1.0 * pow(10, -4), 1.0 * pow(10, -5)]
+alpha_values = [5.0 * pow(10, -3), 1.0 * pow(10, -3),
+                5.0 * pow(10, -4), 1.0 * pow(10, -4)]
 alpha_val = [1.0 * pow(10, -3)]
 
 csv_folder = f"results_csv"
@@ -94,4 +106,10 @@ file_path = f"{csv_folder}/{file_name}"
 
 tester = pd.read_csv(file_path)
 
-result = maxSolarMass_fromcsv(csv_folder, alpha_val[0], m_chi_values, m_mu_values)
+result = maxSolarMass_fromcsv(csv_folder, alpha_values[0], m_chi_values, m_mu_values)
+result2 = maxSolarMass_fromcsv(csv_folder, alpha_values[1], m_chi_values, m_mu_values)
+result3 = maxSolarMass_fromcsv(csv_folder, alpha_values[2], m_chi_values, m_mu_values)
+result4 = maxSolarMass_fromcsv(csv_folder, alpha_values[3], m_chi_values, m_mu_values)
+
+
+

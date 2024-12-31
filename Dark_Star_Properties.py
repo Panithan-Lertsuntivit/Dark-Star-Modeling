@@ -230,7 +230,8 @@ m_chi_values = [1000, 2000, 3000, 4000]
 m_mu_values = [8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
-alpha_values = [1.0 * pow(10, -3), 1.0 * pow(10, -4), 1.0 * pow(10, -5)]
+alpha_values = [5.0 * pow(10, -3), 1.0 * pow(10, -3),
+                5.0 * pow(10, -4), 1.0 * pow(10, -4)]
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
 for coupling_strength, m_particle, m_mediator in \
