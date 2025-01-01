@@ -99,11 +99,44 @@ def solarmass_heatmap_fromcsv(folder_name, alpha_value,
     heatmap_name = f"heatmap_{alpha_value:0.0e}"
     savepath = f"{save_folder}/{heatmap_name}.png"
     plt.savefig(savepath, dpi=300)
-    print(f"Saved heatmap to: {savepath}")
+    print(f"Saved heatmap to: {savepath} \n")
 
     plt.show()
 
     return array_maxsolarmasses
+
+
+def solarmass_curve_comparison(folder_name, alpha_value,
+                               m_chi_array, m_mu_array):
+    # Function takes in ONE alpha value, TWO chi masses, and FOUR mu masses
+    # Chi and Mu values are hard-coded into this function
+    # [1000, 1500, 2000, 2500] => Red, Pink, Blue, Purple
+
+    # Determining color
+    chi_color_array = []
+    chi_sorted = sorted(m_chi_array)
+
+    default_chi_color = ['mediumseagreen', 'dodgerblue']
+
+    for i in range(len(m_chi_array)):
+        # Check if the values are [1000, 1500, 2000, 2500]
+        if (m_chi_array[i] == 1000):
+            chi_color_array[i] = 'coral'
+        elif (m_chi_array[i] == 1500):
+            chi_color_array[i] = 'orchid'
+        elif (m_chi_array[i] == 2000):
+            chi_color_array[i] = 'cornflowerblue'
+        elif (m_chi_array[i] == 2500):
+            chi_color_array[i] = 'mediumpurple'
+        else:
+            chi_color_array[i] = default_chi_color[i]
+
+    # Setting up the figure to plot on [figsize=(width, height)]
+    plt.figure(figsize=(10, 10))
+
+
+
+
 
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
