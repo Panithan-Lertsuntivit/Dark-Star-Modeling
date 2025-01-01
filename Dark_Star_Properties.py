@@ -226,12 +226,11 @@ relativity_parameter = np.arange(0.01, 1.00, 0.001)
 
 # Dark Star particle mass and Field Mediator mass values
 # Mass Units: [Natural: MeV]        [Non-Natural: MeV/c^2]
-m_chi_values = [1000, 2000, 3000, 4000]
-m_mu_values = [8, 10, 12]
+m_chi_values = [500, 1000, 1500, 2000, 2500, 3000]
+m_mu_values = [6, 8, 10, 12]
 
 # Yukawa's Interaction Coupling Strength [Unitless]
-alpha_values = [5.0 * pow(10, -3), 1.0 * pow(10, -3),
-                5.0 * pow(10, -4), 1.0 * pow(10, -4)]
+alpha_values = [1.0 * pow(10, -3), 5.0 * pow(10, -4), 1.0 * pow(10, -4)]
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
 for coupling_strength, m_particle, m_mediator in \
@@ -245,10 +244,9 @@ for coupling_strength, m_particle, m_mediator in \
     dark_star['Comments'] = ''
 
     # Description and save location
-    mass_particle_GeV = int(m_particle/1000)
-    save_description = (f"chi_{mass_particle_GeV}GeV mu_{m_mediator}MeV "
+    save_description = (f"chi_{m_particle}MeV mu_{m_mediator}MeV "
                         f"alpha_{coupling_strength:.0e}")
-    plot_description = (fr"$\chi$ = {mass_particle_GeV} GeV, "
+    plot_description = (fr"$\chi$ = {m_particle} MeV, "
                         fr"$\mu$ = {m_mediator} MeV, "
                         fr"$\alpha$ = {coupling_strength:0.0e}")
 
@@ -285,7 +283,7 @@ for coupling_strength, m_particle, m_mediator in \
     dark_star['SolarMass'] = pd.Series(dark_star_solarmass)
 
     # Commments about the values
-    dark_star.loc[1, 'Comments'] = f"m_chi = {mass_particle_GeV} GeV"
+    dark_star.loc[1, 'Comments'] = f"m_chi = {m_particle} MeV"
     dark_star.loc[3, 'Comments'] = f"m_mu = {m_mediator} MeV"
     dark_star.loc[5, 'Comments'] = f"alpha = {coupling_strength}"
 
@@ -310,15 +308,26 @@ for coupling_strength, m_particle, m_mediator in \
     plt.close('all')
 
 
-'''
-Variables to Try
-Interaction Coupling Strength 
-alpha = 10^-2; 10^-3; 10^-4
+''' - - - - - - - - - - Variable Reasoning - - - - - - - - - -  
+Yukawa's Interaction Coupling Strength [Unit-less]
+alpha = 1x10^-3; 5x10^-4; 1x10^-4
 
-Dark Star Mass
-# Maselli iterated through these values
-m_chi = 1 GeV, 2 GeV, 3 GeV, 4 GeV, 5 GeV         
+# These give an observable trend that can be seen when progressing from 1x10^-3 
+to 1x10^-4. It would have been nice if 1x10^-2 continued the pattern, but for 
+some reason, no Dark Stars are possible at that interaction coupling strength
 
-Mediator Mass
-m_mu = 6 MeV, 8 MeV, 10 MeV, 12 MeV, 14 MeV
+Dark Matter Particle Mass   [Natural: MeV]    [Non-Natural: MeV/c^2]
+m_chi = 500 MeV; 1000 MeV; 1500 MeV; 2000 MeV; 2500 MeV; 3000 MeV 
+
+# Looked at Maselli's paper and decided on [1000 MeV; 2000 MeV; 3000 MeV; 
+4000 MeV; 5000 MeV] but reduced the max to be 3000 MeV, when it was apparently 
+that larger mass values aren't supported in any circumstance
+
+Field Mediator Mass         [Natural: MeV]    [Non-Natural: MeV/c^2]
+m_mu = 6 MeV; 8 MeV; 10 MeV; 12 MeV
+
+# Looked at Maselli's paper and decided on [6 MeV; 8 MeV; 10 MeV; 12 MeV; 
+14 MeV] but reduced the max to be 12 MeV, when it was apparent that larger 
+mediator masses aren't supported after 12 MeV
+
 '''
