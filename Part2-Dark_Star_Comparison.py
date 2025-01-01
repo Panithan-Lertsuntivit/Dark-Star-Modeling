@@ -73,9 +73,14 @@ def solarmass_heatmap_fromcsv(folder_name, alpha_value,
     cbar = fig.colorbar(mappable=cax, ax=ax)
     cbar.set_label(r"Solar Mass [M$_{\odot}$]")
 
+    # Coefficient and exponent for alpha value
+    coefficient_split, exponent_split = f"{alpha_value:0.0e}".split("e")
+    coefficient = round(float(coefficient_split), 1)
+    exponent = int(exponent_split)
+
     # Title and Labels
     # [x_axis = mediator (μ or \mu)] [y_axis = DM particle (χ or \chi)]
-    title_name = f"Max Solar Mass at $\\alpha = {alpha_value:0.0e}$"
+    title_name = (f"Max Solar Mass at $\\alpha = {coefficient} E{exponent}$")
     ax.set_title(title_name, fontweight='bold', fontsize=14)
     ax.set_xlabel(r"Field Mediator Mass (M$_{\mu}$) [MeV]")
     ax.set_ylabel(r"Dark Matter Particle Mass (M$_{\chi}$) [MeV]")
