@@ -86,9 +86,19 @@ def solarmass_heatmap_fromcsv(folder_name, alpha_value,
     ax.set_yticks(range(len(chi_ordered_MeV)))
     ax.set_yticklabels(chi_ordered_MeV)
 
+    # Have the plot fit the figure
     plt.tight_layout()
 
+    # Saving heatmap, before showing the graph
+    save_folder = f"results_final_visuals"
+    heatmap_name = f"heatmap_{alpha_value:0.0e}"
+    savepath = f"{save_folder}/{heatmap_name}.png"
+    plt.savefig(savepath, dpi=300)
+    print(f"Saved heatmap to: {savepath}")
+
     plt.show()
+
+    return array_maxsolarmasses
 
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
@@ -104,9 +114,12 @@ alpha_val = [1.0 * pow(10, -3)]
 
 csv_folder = f"results_csv"
 
-result = solarmass_heatmap_fromcsv(csv_folder, alpha_values[0], m_chi_values, m_mu_values)
-result2 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[1], m_chi_values, m_mu_values)
-result3 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[2], m_chi_values, m_mu_values)
+max_solarmasses_1e_n3 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[0],
+                                                  m_chi_values, m_mu_values)
+max_solarmasses_5e_n4 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[1],
+                                                  m_chi_values, m_mu_values)
+max_solarmasses_1e_n4 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[2],
+                                                  m_chi_values, m_mu_values)
 
 
 
