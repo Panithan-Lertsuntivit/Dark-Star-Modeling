@@ -1,4 +1,5 @@
 # Script is called Part2-Dark_Star_Comparison.py
+import os
 
 import numpy as np
 import pandas as pd
@@ -81,10 +82,10 @@ def solarmass_heatmap_fromcsv(folder_name, alpha_value,
 
     # Title and Labels
     # [x_axis = mediator (μ or \mu)] [y_axis = DM particle (χ or \chi)]
-    title_name = (f"Max Solar Mass at $\\alpha = {coefficient} E{exponent}$")
-    ax.set_title(title_name, fontweight='bold', fontsize=14)
-    ax.set_xlabel(r"Field Mediator Mass (M$_{\mu}$) [MeV]")
-    ax.set_ylabel(r"Dark Matter Particle Mass (M$_{\chi}$) [MeV]")
+    title_name = f"Max Solar Mass at $\\alpha = {coefficient} E{exponent}$"
+    # ax.set_title(title_name, fontweight='bold', fontsize=14)
+    ax.set_xlabel(r"Field Mediator Mass (M$_{\mu}$) [MeV]", fontsize=15)
+    ax.set_ylabel(r"Dark Matter Particle Mass (M$_{\chi}$) [MeV]", fontsize=15)
 
     # Tick marks
     ax.set_xticks(range(len(mu_ordered_MeV)))
@@ -134,7 +135,7 @@ def solarmass_curve_comparison(folder_name, alpha_value,
             chi_color_array[i] = default_chi_color[i]
 
     # Setting up the figure to plot on [figsize=(width, height)]
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(6, 5))
     legend_labels = []
 
     alpha_file_segment = f"alpha_{alpha_value:0.0e}"
@@ -189,9 +190,29 @@ def solarmass_curve_comparison(folder_name, alpha_value,
                      color=curvecolor, linestyle='dashed', markevery=100,
                      marker=marker_style, markerfacecolor=marker_color,
                      markersize=10)
-            legend_labels.append(f"$\\mu$={mu_value}MeV \t$\\chi$={chi_value}MeV")
+            legend_chi_value = round((chi_value/1000), 1)
+            legend_labels.append(f"$\\chi$={legend_chi_value}GeV\t$\\mu$={mu_value}MeV")
 
+    # Titles and Axes
+    # plt.title('Dark Star Mass-Radius Profiles', fontsize=15)
+    plt.xlabel('Radius [km]', fontsize=12)
+    plt.ylabel(r'Solar Mass [M$_{\odot}$]', fontsize=12)
+    plt.ylim(bottom=-0.1, top=3)
+
+    # Legend, tight fit
     plt.legend(labels=legend_labels)
+    plt.tight_layout()
+
+    # Save result
+    save_folder = "results_final_visuals"
+    description = ((f"curve_compare chi_{m_chi_array} mu_{m_mu_array} "
+                   f"alpha_{alpha_value:0.0e}")
+                   .replace('[', '').replace(']', ''))
+    file_name = description.replace(', ', '_')
+    save_path = f"{save_folder}/{file_name}.png"
+    plt.savefig(save_path, dpi=300)
+    print(f"Saved graph to: {save_path}")
+
     plt.show()
 
 
@@ -217,4 +238,7 @@ max_solarmasses_1e_n4 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[2],
 
 solarmass_curve_comparison(csv_folder, alpha_values[0], [1000, 2000],
                            [8, 10, 12])
-
+solarmass_curve_comparison(csv_folder, alpha_values[1], [1000, 2000],
+                           [8, 10, 12])
+solarmass_curve_comparison(csv_folder, alpha_values[2], [1000, 2000],
+                           [8, 10, 12])
