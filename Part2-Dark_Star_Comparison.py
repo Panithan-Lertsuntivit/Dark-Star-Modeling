@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from scipy.interpolate import splev, splrep
 
 
 ''' - - - - - - - - Functions - - - - - - - - '''
@@ -112,20 +113,21 @@ def solarmass_curve_comparison(folder_name, alpha_value,
     # Chi and Mu values are hard-coded into this function
     # [1000, 1500, 2000, 2500] => Red, Pink, Blue, Purple
 
-    # Determining color
-    chi_color_array = []
+    # Determining color / ordering the chi and mu values
+    chi_color_array = ['black', 'black']
     chi_sorted = sorted(m_chi_array)
+    mu_sorted = sorted(m_mu_array, reverse=True)
 
-    default_chi_color = ['mediumseagreen', 'dodgerblue']
+    default_chi_color = ['orchid', 'dodgerblue']
 
     for i in range(len(m_chi_array)):
         # Check if the values are [1000, 1500, 2000, 2500]
         if (m_chi_array[i] == 1000):
-            chi_color_array[i] = 'coral'
+            chi_color_array[i] = 'firebrick'
         elif (m_chi_array[i] == 1500):
-            chi_color_array[i] = 'orchid'
+            chi_color_array[i] = 'mediumseagreen'
         elif (m_chi_array[i] == 2000):
-            chi_color_array[i] = 'cornflowerblue'
+            chi_color_array[i] = 'royalblue'
         elif (m_chi_array[i] == 2500):
             chi_color_array[i] = 'mediumpurple'
         else:
@@ -133,10 +135,64 @@ def solarmass_curve_comparison(folder_name, alpha_value,
 
     # Setting up the figure to plot on [figsize=(width, height)]
     plt.figure(figsize=(10, 10))
+    legend_labels = []
 
+    alpha_file_segment = f"alpha_{alpha_value:0.0e}"
+    for chi_idx, chi_value in enumerate(chi_sorted):
+        # Set curve color based on chi index, and file segment
+        curvecolor = chi_color_array[chi_idx]
+        chi_file_segment = f"chi_{chi_value}MeV"
 
+        for mu_idx, mu_value in enumerate(mu_sorted):
 
+            # Different marker based on mu_index
+            match mu_idx:
+                case 0:
+                    # Circle filled
+                    marker_style = 'o'
+                    marker_color = curvecolor
+                case 1:
+                    # Hexagon1 white infill
+                    marker_style = 'h'
+                    marker_color = 'snow'
+                case 2:
+                    # Triangle Up filled
+                    marker_style = '^'
+                    marker_color = curvecolor
+                case 3:
+                    # Diamond white infill
+                    marker_style = 'D'
+                    marker_color = 'snow'
+                case _:
+                    # For invalid cases
+                    marker_style = '1'
+                    marker_color = curvecolor
+            mu_file_segment = f"mu_{mu_value}MeV"
 
+            # csv path, and reading the file contents into DataFrame
+            csv_path = (f"{folder_name}/{chi_file_segment} {mu_file_segment} "
+                        f"{alpha_file_segment}.csv")
+            darkstar_df = pd.read_csv(csv_path)
+
+            # Reading contents from csv file
+            print(f"Read contents from: {csv_path}")
+
+            # Collecting only the SolarMass column and finding the max value
+            column_names = darkstar_df.columns
+            radius_label = column_names[0]
+            solarmass_label = column_names[2]
+
+            radius_array = darkstar_df[radius_label].to_numpy()
+            solarmass_array = darkstar_df[solarmass_label].to_numpy()
+
+            plt.plot(radius_array, solarmass_array,
+                     color=curvecolor, linestyle='dashed', markevery=100,
+                     marker=marker_style, markerfacecolor=marker_color,
+                     markersize=10)
+            legend_labels.append(f"$\\mu$={mu_value}MeV \t$\\chi$={chi_value}MeV")
+
+    plt.legend(labels=legend_labels)
+    plt.show()
 
 
 ''' - - - - - - - - Main Code - - - - - - - - '''
@@ -159,5 +215,6 @@ max_solarmasses_5e_n4 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[1],
 max_solarmasses_1e_n4 = solarmass_heatmap_fromcsv(csv_folder, alpha_values[2],
                                                   m_chi_values, m_mu_values)
 
-
+solarmass_curve_comparison(csv_folder, alpha_values[0], [1000, 2000],
+                           [8, 10, 12])
 
