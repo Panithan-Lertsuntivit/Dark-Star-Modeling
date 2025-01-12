@@ -104,6 +104,34 @@ def calculate_energy_density(x, m_chi, m_mu, alpha):
     return energy_density_calculated
 
 
+def plot_densities(x, energydensity, pressuredensity,
+                   graph_title, file_description):
+    # x - relativity parameter
+
+    # Density graphs save folder, and file save path
+    results_density_graphs = "results_density_graphs"
+    file_name = f"density_graph {file_description}"
+    save_path = f"{results_density_graphs}/{file_name}"
+
+    # Plotting the result
+    plt.plot(x, energydensity, label='Energy Density')
+    plt.plot(x, pressuredensity, label='Pressure Density')
+
+    # Title, labels, and legend
+    plt.title(graph_title)
+    plt.ylabel(f"Density Value [$MeV$/$fm^3$]")
+    plt.xlabel(f"Relativity Parameter (x)")
+    plt.legend()
+
+    # Formatting and saving plot
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300)
+    print(f"Saved density graph to: {save_path}")
+
+    plt.close('all')
+
+
+
 def dark_star_mass_radius(energydensity, pressuredensity):
     # Input [Natural Units] -> Output [Non-Natural Units / SI Units]
     # Initializing array for storing Dark Star mass and radius values
@@ -264,6 +292,12 @@ for coupling_strength, m_particle, m_mediator in \
     energy_density \
         = calculate_energy_density(x=relativity_parameter, m_chi=m_particle,
                                    m_mu=m_mediator, alpha=coupling_strength)
+
+    # Plotting the pressure density and energy density
+    plot_densities(x=relativity_parameter, energydensity=energy_density,
+                   pressuredensity=pressure_density,
+                   graph_title=plot_description,
+                   file_description=save_description)
 
     # When calculating the dark star mass and radius, the inputs are in Natural
     # Units but the output is in Non-Natural Units [SI Units]
