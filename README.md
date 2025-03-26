@@ -20,8 +20,11 @@ The information known about dark matter is detailed but quite sparse. For instan
 
 Figure 1 is an image of galaxy cluster Abell 1698, which shows a distribution of Dark Matter concentrations produced by researchers at NASA. The tints of blue are the inferred Dark Matter concentrations within the galaxy cluster.
 
-<img src="Images/STScI-01EVT51HJBMFAP17EQNFS2HFV2.jpg" alt="Abell 1698" height="500"/>   \
-Figure 1: NASA, ESA, and D. Coe (JPL/Caltech and STScl)
+<div style="text-align: center;">
+  <img src="Images/STScI-01EVT51HJBMFAP17EQNFS2HFV2.jpg" alt="Abell 1698" style="width: 500; height: auto;">
+  <p><strong>Figure 1:</strong> NASA, ESA, and D. Coe (JPL/Caltech and STScl)</p>
+</div>
+
 
 With so much unknown about dark matter, large amounts of research is devoted to the study of dark matter and their characteristics. For instance, it has been theorized that the self-interactions of dark matter are purely gravitational, leading to the clumping of dark matter or the formation of Dark Stars. Research into the clumping of dark matter is usually referenced with the formation of Neutron Stars, which are composed primarily of neutrons and are the densest objects observable within the universe [[1]](https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html).  
 
@@ -36,8 +39,11 @@ Interactions between Dark Matter particles can depend on multiple variables:
 ## Methods / Results
 In this study, dark matter self interactions are assumed to be repulsive and depend on multiple variables like the dark matter particles ($\chi$), field mediator ($\mu$), and interaction coupling strength ($\alpha$). Figure 2 is a Feynman diagram visualizing the self interactions between dark matter particles.
 
-<img src="Images/Feynman_DarkMatterInteraction.png" alt="Feynman Diagram - Dark Matter Interaction" height="500"/>   \
-Figure 2: Feynman Diagram - Dark Matter Interaction 
+<div style="text-align: center;">
+  <img src="Images/Feynman_DarkMatterInteraction.png" alt="Feynman Diagram - Dark Matter Interaction" style="width: 500; height: auto;">
+  <p><strong>Figure 2:</strong> Feynman Diagram - Dark Matter Interaction</p>
+</div>
+
 
 As the dark matter particles approach each other, the field mediator is an intermediary particle that passes the interaction coupling strength between the two dark matter particles. In a sense, the field mediator is a messenger particle “carrying” the interaction coupling strength, determining the type of interaction that occurs between the dark matter particles. However, the interaction isn’t completely dependent on the field mediator. 
 
@@ -115,8 +121,11 @@ With these values calculated, an equation of state has been established for dark
 
 $$m_{\chi} = 1000 MeV / c^{2} \qquad m_{\mu} = 10 MeV / c^{2} \qquad \alpha = 10^{-3}$$
 
-<img src="results_density_graphs/density_graph chi_1000MeV mu_10MeV alpha_1e-03.png" alt="Pressure and Energy Density Example Graph" height="500"/>   \
-Figure 3: Pressure and Energy Density Graph - $m_{\chi} = 1000 MeV / c^{2}, \, m_{\mu} = 10 MeV / c^{2}, \, \alpha = 10^{-3}$ 
+<div style="text-align: center;">
+  <img src="results_density_graphs/density_graph chi_1000MeV mu_10MeV alpha_1e-03.png" alt="Pressure and Energy Density Example Graph" style="width: 500; height: auto;">
+  <p><strong>Figure 3:</strong> Example Pressure and Energy Density Graph</p>
+</div>
 
-With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star.
+With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star. Within the graph, the total masses are expressed as solar mass multiples, where one solar mass ($M_{\odot}$) is equal to $1.989 \times 10^{30} kg$. 
+
 
