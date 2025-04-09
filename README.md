@@ -119,13 +119,75 @@ $$
 
 With these values calculated, an equation of state has been established for dark matter clumping, which describes the relationship between the pressure density and energy density of dark matter. An example graph of the pressure density and energy density with the following parameters: 
 
-$$m_{\chi} = 1000 MeV / c^{2} \qquad m_{\mu} = 10 MeV / c^{2} \qquad \alpha = 10^{-3}$$
+$$m_{\chi} = 1000 \, MeV / c^{2} \qquad m_{\mu} = 10 \, MeV / c^{2} \qquad \alpha = 10^{-3}$$
 
 <div style="text-align: center;">
   <img src="results_density_graphs/density_graph chi_1000MeV mu_10MeV alpha_1e-03.png" alt="Pressure and Energy Density Example Graph" style="width: 500; height: auto;">
   <p><strong>Figure 3:</strong> Example Pressure and Energy Density Graph</p>
 </div>
 
-With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star. Within the graph, the total masses are expressed as solar mass multiples, where one solar mass ($M_{\odot}$) is equal to $1.989 \times 10^{30} kg$. 
+With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star. Within the graph, the total masses are expressed as solar mass multiples, where one solar mass ($M_{\odot}$) is equal to $1.989 \times 10^{30} \, kg$. 
+
+This process was repeated for multiple parameter combinations, iterating through the following values:
+- Dark Matter Particle Mass: $[500, 1000, 1500, 2000, 2500, 3000] \, MeV$
+- Field Mediator Mass: $[6, 8, 10, 12] \, MeV$
+- Yukawa Interaction Coupling Strength: $[1 \times 10^{-3}, 5 \times 10^{-4}, 1 \times 10^{-4}]$
+
+These values were chosen based on experimented values within "Dark stars: Gravitational and electromagnetic observables" and further expanded with intermediary values. The maximum Dark Star within each parameter combination was then compared using several heatmaps to identify any ponential trends with respect to changing parameter values. Below are the three different heat maps created using the parameters in this study, each representing a unique Yukawa Interaction Coupling Strength. 
+
+<div style="text-align: center;">
+  <img src="results_final_visuals/heatmap_1e-03.png" alt="Heat Map Maximum Dark Stars 1E-3 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 4:</strong> Heat Map for the Maximum Dark Stars with a 1E-3 Yukawa Interaction Coupling Strength</p>
+</div>
 
 
+<div style="text-align: center;">
+  <img src="results_final_visuals/heatmap_5e-04.png" alt="Heat Map Maximum Dark Stars 5E-4 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 5:</strong> Heat Map for the Maximum Dark Stars with a 5E-4 Yukawa Interaction Coupling Strength</p>
+</div>
+
+<div style="text-align: center;">
+  <img src="results_final_visuals/heatmap_1e-04.png" alt="Heat Map Maximum Dark Stars 1E-4 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 6:</strong> Heat Map for the Maximum Dark Stars with a 1E-4 Yukawa Interaction Coupling Strength</p>
+</div>
+
+The heatmaps have a gradient that transitions from red to blue, as the Dark Star mass increases. Parameter combinations that are result in a red color mean that the Dark Star would have a maximum mass of 0.8 solar masses or less. This would indicate that the particular Dark Star is unsustainable, as observed Neutron star masses are not sustainable with less than 0.8 to 1.0 solar masses [1, link to the article that mentions this]. The probable result of these parameter combinations would be a collapse in mass and a formation of a black hole. 
+
+## Discussion
+The results of this study were compared to the results of other research articles [articles by Kouvaris and Maselli, etc]. Similar results in the curve comparison of the same parameters, which are shown below in Figures (8, 9, 10?), validate that the theoretical constructs were implemented appropriately. 
+
+<div style="text-align: center;">
+  <img src="results_final_visuals/curve_compare chi_1000_2000 mu_8_10_12 alpha_1e-03.png" alt="Parameter Curve Comparison at 1E-3 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 7:</strong> Parameter Curve Comparison at 1E-3 Yukawa Interaction Coupling Strength</p>
+</div>
+
+<div style="text-align: center;">
+  <img src="results_final_visuals/curve_compare chi_1000_2000 mu_8_10_12 alpha_5e-04.png" alt="Parameter Curve Comparison at 5E-4 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 8:</strong> Parameter Curve Comparison at 5E-4 Yukawa Interaction Coupling Strength</p>
+</div>
+
+<div style="text-align: center;">
+  <img src="results_final_visuals/curve_compare chi_1000_2000 mu_8_10_12 alpha_1e-04.png" alt="Parameter Curve Comparison at 1E-4 Interaction Strength" style="width: 500; height: auto">
+  <p><strong>Figure 9:</strong> Parameter Curve Comparison at 1E-4 Yukawa Interaction Coupling Strength</p>
+</div>
+
+Notable deviations at high particle masses (specifically when $\chi > 3000 \, MeV$) highlights computational or theoretical limitations for Dark Stars. 
+
+## Future Directions
+
+Future directions within this topic include but are not limited to: 
+1. Refinement of Yukawa potential apprximations
+2. Extended parameters for ultra-relativistic particles
+3. Connecting theoretical results to observed dark stars or dark matter clumping
+
+Continued research would merge computational astrophysics and dark matter theory, making progress towards more robust and validated dark matter clumping models. 
+
+## Notes / Extra
+
+The validation underscores the robustness of theoretical constructs. Notable deviations at high 
+particle masses (χ > 3000 MeV) highlight computational or theoretical limitations. Future work 
+may refine Yukawa potential approximations or extend parameters for ultra-relativistic regimes. 
+
+Heatmaps contextualize prior isolated results, emphasizing mass-radius trade-offs influenced by 
+mediator dynamics. These findings inform the search for observational signatures correlating 
+dark stars with gravitational wave events or lensing phenomena
