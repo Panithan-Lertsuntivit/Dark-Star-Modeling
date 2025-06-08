@@ -9,26 +9,29 @@ $$\frac{dM}{dr} = 4 \pi r^{2} \rho(r)$$
 Started in 2022 under the guidance of Professor William Spinella
 
 ## Abstract
-Dark matter is an unknown substance that accounts for most of the mass within the universe. Researchers try to understand the properties of dark matter and its interactions with other particles.
+Dark matter is an unknown substance that accounts for most of the mass within the universe. Researchers try to understand the properties of dark matter and its interactions with other particles (Bahcall) <a href="https://www.pnas.org/doi/epdf/10.1073/pnas.1516944112" target="_blank">[1]</a>.
 
-This study aims to reproduce the findings within “Asymmetric dark matter stars” and "Dark stars: Gravitational and electromagnetic observables” by constructing mass-radius relationships for dark matter clumping, or Dark Stars, and to further observe any trends that may occur from different parameters.
+This study aims to reproduce the findings within “Asymmetric dark matter stars” (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> and "Dark stars: Gravitational and electromagnetic observables” (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a> by constructing mass-radius relationships for dark matter clumping, or Dark Stars, and to further observe any trends that may occur from different parameters.
 
 A theoretical model for Dark Stars was implemented, allowing the Tolman-Oppenheimer-Volkoff (TOV) equations to be solved and producing Dark Star mass-radius curves. Experimentation was done on parameter values and the resulting curves were compared to identify trends among different Dark Stars properties.
 
 ## Introduction
 The information known about dark matter is detailed but quite sparse. For instance, the existence of dark matter particles is crucial to explain the high velocities of many galaxies and galaxy clusters, as the observable mass within them alone isn’t enough to maintain their velocities. As a result, it has been concluded that a majority of the mass within these galaxies and galaxy clusters is due to dark matter particles that interact weakly with other types of matter outside of gravitational interactions, making it difficult to directly detect dark matter. The current state of technology and experiments isn’t sufficient enough to directly detect dark matter, but it is possible to infer concentrations of dark matter.
 
-Figure 1 is an image of galaxy cluster Abell 1698, which shows a distribution of Dark Matter concentrations produced by researchers at NASA. The tints of blue are the inferred Dark Matter concentrations within the galaxy cluster.
+Figure 1 is an image of galaxy cluster Abell 1698, which shows a distribution of Dark Matter concentrations produced by researchers at NASA. The tints of blue are the inferred Dark Matter concentrations within the galaxy cluster through gravitational lensing (NASA) <a href="https://science.nasa.gov/missions/hubble/detailed-dark-matter-map-yields-clues-to-galaxy-cluster-growth/" target="_blank">[4]</a>.
 
 <div style="text-align: center;">
   <img src="Images/STScI-01EVT51HJBMFAP17EQNFS2HFV2.jpg" alt="Abell 1698" style="width: 500; height: auto;">
-  <p><strong>Figure 1:</strong> NASA, ESA, and D. Coe (JPL/Caltech and STScl)</p>
+  <p><strong>Figure 1:</strong> NASA, ESA, and D. Coe (JPL/Caltech and STScl) <a href="https://science.nasa.gov/asset/hubble/hubble-helps-astronomers-map-dark-matter-in-abell-1689/" target="_blank">[5]</a> </p>
 </div>
 
 
-With so much unknown about dark matter, large amounts of research is devoted to the study of dark matter and their characteristics. For instance, it has been theorized that the self-interactions of dark matter are purely gravitational, leading to the clumping of dark matter or the formation of Dark Stars. Research into the clumping of dark matter is usually referenced with the formation of Neutron Stars, which are composed primarily of neutrons and are the densest objects observable within the universe [[1]](https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html).  
+With so much unknown about dark matter, large amounts of research is devoted to the study of dark matter and their characteristics. For instance, it has been theorized that the self-interactions of dark matter are purely gravitational, leading to the clumping of dark matter or the formation of Dark Stars. Research into the clumping of dark matter is usually referenced with the formation of Neutron Stars, which are composed primarily of neutrons and are the densest objects observable within the universe (NASA) <a href="https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html" target="_blank">[6]</a>.
 
-For comparison, neutrons have a mass of about $939.565 MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 MeV$ all the way to $1,000,000 MeV$ [Kouvaris and Maselli Papers]. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
+<!-- Information about the mass of newtrons is present here (https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev). From the National Institute of Standards and Technology (or NIST) -->
+<!-- Maselli's Paper (https://doi.org/10.48550/arXiv.1704.07286) modeled with dark particle masses of 1 and 2 GeV [1,000 MeV and 2,000 MeV] (look at Figure 1's left graph)  -->
+<!-- Kouvaris's Paper (https://doi.org/10.48550/arXiv.1507.00959) modeled with dark particle masses of 10 GeV, 100 GeV, and 1 TeV [10,000 MeV; 100,000 MeV; and 1,000,000 MeV] (look at Figure 3's graphs) -->
+For comparison, neutrons have a mass of about $939.565 MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 MeV$ all the way to $1,000,000 MeV$ (NIST) <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">[7]</a> (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
 
 **Dark Matter Interactions**     \
 Interactions between Dark Matter particles can depend on multiple variables:     
@@ -51,39 +54,44 @@ Each of the variables affect the interaction in different ways. For the dark mat
 
 These variables are then applied to the following equations to calculate the repulsive Yukawa potential energy (1), kinetic pressure (2) and kinetic energy (3) values for dark matter clumping.
 
+<!-- Equation 1 is from Equation 10 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
     \rho_{Yukawa} = \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{1}
 \end{equation}
 $$
 
+<!-- Equation 2 is from Equation 5 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
-    P_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \, \psi(x) \tag{2}
+    P_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \psi(x) \tag{2}
 \end{equation}
 $$
 
+<!-- Equation 3 is from Equation 4 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
-    \rho_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \, \xi(x) \tag{3}
+    \rho_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \xi(x) \tag{3}
 \end{equation}
 $$
 
 
-In equation (1), the x variable is a measure of how relativistic a particle is, or how much their behavior is influenced by the principles of Einstein’s theory of relativity [Kouvaris]. Non-relativistic particles move much slower than the speed of light, and can be described using classical physics. While relativistic particles move significant fractions of the speed of light, and can only be described using the laws of relativity. The general ranges of x and their meaning are as follows:
+In equation (1), the x variable is a measure of how relativistic a particle is, or how much their behavior is influenced by the principles of Einstein’s theory of relativity (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a>. Non-relativistic particles move much slower than the speed of light, and can be described using classical physics. While relativistic particles move significant fractions of the speed of light, and can only be described using the laws of relativity. The general ranges of x and their meaning are as follows:
 - $x = 0 \, \qquad$            [particle is at rest]
 - $x > 1 \, \qquad$            [particle is non-relativistic, moving at slow speeds]
 - $x \approx 1 \, \qquad$      [particle is relativistic, moving at significant fractions of the speed of light]
 - $x \gg 1 \qquad$          [particle is highly relativistic, moving close to the speed of light]
 
-Within this study, the relativistic parameter was kept to a range of 0 to 1, testing particles that are non-relativistic and relativistic. Additionally, the $\xi(x)$ and $\psi(x)$ equations within the Kinetic Pressure and Kinetic Energy equations were provided in “Asymmetric dark matter stars,” and are the following equations below [Kouvaris et al].
+Within this study, the relativistic parameter was kept to a range of 0 to 1, testing particles that are non-relativistic and relativistic. Additionally, the $\xi(x)$ and $\psi(x)$ equations within the Kinetic Pressure and Kinetic Energy equations were provided in “Asymmetric dark matter stars,” and are the following equations below (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a>.
 
+<!-- Equation 4 is from Equation 6 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
     \xi(x) = \frac{1}{8 \pi^{2}} \left[x \sqrt{1 + x^{2}} (1 + 2x^{2}) - ln\left(x + \sqrt{1 + x^{2}}\right) \right] \tag{4}
 \end{equation}
 $$
 
+<!-- Equation 5 is from Equation 7 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
     \psi(x) = \frac{1}{8 \pi^{2}} \left[x \sqrt{1 + x^{2}} (\frac{2 x^{2}}{3} - 1) + ln\left(x + \sqrt{1 + x^{2}}\right) \right] \tag{5}
@@ -92,6 +100,7 @@ $$
 
 After these values are calculated, they are then summed up to determine the total pressure and energy density for dark matter clumping.
 
+<!-- Equation 6 is from Equation 11 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
     P_{total} = P_{kinetic} + \rho_{Yukawa} \notag
@@ -100,11 +109,11 @@ $$
 
 $$
 \begin{equation}
-    P_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \, \psi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{6}
+    P_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \psi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{6}
 \end{equation}
 $$
 
-
+<!-- Equation 7 is from Equation 12 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
     \rho_{total} = \rho_{kinetic} + \rho_{Yukawa} \notag
@@ -113,7 +122,7 @@ $$
 
 $$
 \begin{equation}
-    \rho_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \, \xi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{7}
+    \rho_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \xi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{7}
 \end{equation}
 $$
 
@@ -151,10 +160,11 @@ These values were chosen based on experimented values within "Dark stars: Gravit
   <p><strong>Figure 6:</strong> Heat Map for the Maximum Dark Stars with a 1E-4 Yukawa Interaction Coupling Strength</p>
 </div>
 
-The heatmaps have a gradient that transitions from red to blue, as the Dark Star mass increases. Parameter combinations that are result in a red color mean that the Dark Star would have a maximum mass of 0.8 solar masses or less. This would indicate that the particular Dark Star is unsustainable, as observed Neutron star masses are not sustainable with less than 0.8 to 1.0 solar masses [1, link to the article that mentions this]. The probable result of these parameter combinations would be a collapse in mass and a formation of a black hole. 
+<!-- Smallest observed Neutron Star has a mass of 0.93 +/- 0.12 solar masses (which put it between the range of 0.8 to 1.0 solar masses). This was stated in Lattimer's paper in section 3.3 The Minimum Neutron Star Mass (https://doi.org/10.48550/arXiv.1305.3510) -->
+The heatmaps have a gradient that transitions from red to blue, as the Dark Star mass increases. Parameter combinations that are result in a red color mean that the Dark Star would have a maximum mass of 0.8 solar masses or less. This would indicate that the particular Dark Star is unsustainable, as observed Neutron star masses are not sustainable with less than 0.8 to 1.0 solar masses (Lattimer, 2013) <a href="https://doi.org/10.48550/arXiv.1305.3510" target="_blank">[8]</a>. The probable result of these parameter combinations would be a collapse in mass and a formation of a black hole. 
 
 ## Discussion
-The results of this study were compared to the results of other research articles [articles by Kouvaris and Maselli, etc]. Similar results in the curve comparison of the same parameters, which are shown below in Figures (8, 9, 10?), validate that the theoretical constructs were implemented appropriately. 
+The results of this study were compared to the results of other research articles, specifically “Asymmetric dark matter stars” (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> and "Dark stars: Gravitational and electromagnetic observables” (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. Similar results in the curve comparison of the same parameters, which are shown below in Figures (7, 8, 9), validate that the theoretical constructs were implemented appropriately. 
 
 <div style="text-align: center;">
   <img src="results_final_visuals/curve_compare chi_1000_2000 mu_8_10_12 alpha_1e-03.png" alt="Parameter Curve Comparison at 1E-3 Interaction Strength" style="width: 500; height: auto">
@@ -169,25 +179,30 @@ The results of this study were compared to the results of other research article
 <div style="text-align: center;">
   <img src="results_final_visuals/curve_compare chi_1000_2000 mu_8_10_12 alpha_1e-04.png" alt="Parameter Curve Comparison at 1E-4 Interaction Strength" style="width: 500; height: auto">
   <p><strong>Figure 9:</strong> Parameter Curve Comparison at 1E-4 Yukawa Interaction Coupling Strength</p>
-</div>
-
-Notable deviations at high particle masses (specifically when $\chi > 3000 \, MeV$) highlights computational or theoretical limitations for Dark Stars. 
+</div> 
 
 ## Future Directions
 
 Future directions within this topic include but are not limited to: 
-1. Refinement of Yukawa potential apprximations
+1. Refinement of Yukawa potential approximations
 2. Extended parameters for ultra-relativistic particles
 3. Connecting theoretical results to observed dark stars or dark matter clumping
 
 Continued research would merge computational astrophysics and dark matter theory, making progress towards more robust and validated dark matter clumping models. 
 
-## Notes / Extra
+## References 
+1. Bahcall, Neta A. "Dark matter universe." Proceedings of the National Academy of Sciences, vol. 112, no. 40, 2015, pp. 12243 - 12245. <a href="https://www.pnas.org/doi/epdf/10.1073/pnas.1516944112" target="_blank">https://www.pnas.org/doi/epdf/10.1073/pnas.1516944112</a>
 
-The validation underscores the robustness of theoretical constructs. Notable deviations at high 
-particle masses (χ > 3000 MeV) highlight computational or theoretical limitations. Future work 
-may refine Yukawa potential approximations or extend parameters for ultra-relativistic regimes. 
+2. Kouvaris, Chris and Niklas Grønlund Nielsen. "Asymmetric dark matter stars." Physical Review D, vol. 92, no. 6, 2015. <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">https://doi.org/10.48550/arXiv.1507.00959</a>
 
-Heatmaps contextualize prior isolated results, emphasizing mass-radius trade-offs influenced by 
-mediator dynamics. These findings inform the search for observational signatures correlating 
-dark stars with gravitational wave events or lensing phenomena
+3. Maselli, Andrea, et al. "Dark stars: Gravitational and electromagnetic observables." Physical Review D, vol. 96, no. 2, 2017. <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">https://doi.org/10.48550/arXiv.1704.07286</a>
+
+4.  NASA, ESA, D. Coe (NASA Jet Propulsion Laboratory/California Institute of Technology, and Space Telescope Science Institute) *Detailed Dark Matter Map Yields Clues to Galaxy Cluster Growth*. <a href="https://science.nasa.gov/missions/hubble/detailed-dark-matter-map-yields-clues-to-galaxy-cluster-growth/" target="_blank">https://science.nasa.gov/missions/hubble/detailed-dark-matter-map-yields-clues-to-galaxy-cluster-growth/</a>
+
+5. NASA, ESA, D. Coe (NASA Jet Propulsion Laboratory/California Institute of Technology, and Space Telescope Science Institute) *Hubble Helps Astronomers Map Dark Matter in Abell 1689*. <a href="https://science.nasa.gov/asset/hubble/hubble-helps-astronomers-map-dark-matter-in-abell-1689/" target="_blank">https://science.nasa.gov/asset/hubble/hubble-helps-astronomers-map-dark-matter-in-abell-1689/</a>
+
+6. NASA *Neutron Stars*. <a href="https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html" target="_blank">https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html</a>
+
+7. National Institute of Standards Technology <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev</a>
+
+8. Lattimer, James M. "The Nuclear Equation of State and Neutron Star Mass." Annual Review of Nuclear and Particle Science, vol. 62, no. 1, 2013. <a href="https://doi.org/10.48550/arXiv.1305.3510" target="_blank">https://doi.org/10.48550/arXiv.1305.3510</a>
