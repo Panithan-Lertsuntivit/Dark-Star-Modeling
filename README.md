@@ -31,7 +31,7 @@ With so much unknown about dark matter, large amounts of research is devoted to 
 <!-- Information about the mass of newtrons is present here (https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev). From the National Institute of Standards and Technology (or NIST) -->
 <!-- Maselli's Paper (https://doi.org/10.48550/arXiv.1704.07286) modeled with dark particle masses of 1 and 2 GeV [1,000 MeV and 2,000 MeV] (look at Figure 1's left graph)  -->
 <!-- Kouvaris's Paper (https://doi.org/10.48550/arXiv.1507.00959) modeled with dark particle masses of 10 GeV, 100 GeV, and 1 TeV [10,000 MeV; 100,000 MeV; and 1,000,000 MeV] (look at Figure 3's graphs) -->
-For comparison, neutrons have a mass of about $939.565 MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 MeV$ all the way to $1,000,000 MeV$ (NIST) <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">[7]</a> (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
+For comparison, neutrons have a mass of about $939.565 \, MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 \, MeV$ all the way to $1,000,000 \, MeV$ (NIST) <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">[7]</a> (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
 
 **Dark Matter Interactions**     \
 Interactions between Dark Matter particles can depend on multiple variables:     
@@ -128,7 +128,7 @@ $$
 
 With these values calculated, an equation of state has been established for dark matter clumping, which describes the relationship between the pressure density and energy density of dark matter. An example graph of the pressure density and energy density with the following parameters: 
 
-$$m_{\chi} = 1000 \, MeV / c^{2} \qquad m_{\mu} = 10 \, MeV / c^{2} \qquad \alpha = 10^{-3}$$
+$$m_{\chi} = 1000 \: MeV / c^{2} \qquad m_{\mu} = 10 \, MeV / c^{2} \qquad \alpha = 10^{-3}$$
 
 <div style="text-align: center;">
   <img src="results_density_graphs/density_graph chi_1000MeV mu_10MeV alpha_1e-03.png" alt="Pressure and Energy Density Example Graph" style="width: 500; height: auto;">
