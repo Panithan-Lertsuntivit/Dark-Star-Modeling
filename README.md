@@ -31,9 +31,9 @@ With so much unknown about dark matter, large amounts of research is devoted to 
 <!-- Information about the mass of newtrons is present here (https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev). From the National Institute of Standards and Technology (or NIST) -->
 <!-- Maselli's Paper (https://doi.org/10.48550/arXiv.1704.07286) modeled with dark particle masses of 1 and 2 GeV [1,000 MeV and 2,000 MeV] (look at Figure 1's left graph)  -->
 <!-- Kouvaris's Paper (https://doi.org/10.48550/arXiv.1507.00959) modeled with dark particle masses of 10 GeV, 100 GeV, and 1 TeV [10,000 MeV; 100,000 MeV; and 1,000,000 MeV] (look at Figure 3's graphs) -->
-For comparison, neutrons have a mass of about $939.565 \, MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 \text{ } MeV$ all the way to $1,000,000 \, MeV$ (NIST) <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">[7]</a> (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
+For comparison, neutrons have a mass of about $939.565 \text{ } MeV$, while some studies have theorized and modeled dark matter with mass values between $1000 \text{ } MeV$ all the way to $1,000,000 \text{ } MeV$ (NIST) <a href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev" target="_blank">[7]</a> (Kouvaris et al., 2015) <a href="https://doi.org/10.48550/arXiv.1507.00959" target="_blank">[2]</a> (Maselli et al., 2017) <a href="https://doi.org/10.48550/arXiv.1704.07286" target="_blank">[3]</a>. While these similarities aren’t perfect, Neutron Stars are the only observable objects that can be referenced because of their extreme density and resulting gravitational properties, characteristics uniquely shared with Dark Stars.
 
-**Dark Matter Interactions**     \
+**Dark Matter Interactions**     
 Interactions between Dark Matter particles can depend on multiple variables:     
  - Dark Matter Particles ($\chi$) and their mass ($m_{\chi}$)
  - Field Mediators ($\mu$) and their mass ($m_{\mu}$)
@@ -64,14 +64,14 @@ $$
 <!-- Equation 2 is from Equation 5 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
-    P_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \psi(x) \tag{2}
+    P_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \text{ } \psi(x) \tag{2}
 \end{equation}
 $$
 
 <!-- Equation 3 is from Equation 4 in the Kouvari's paper (https://doi.org/10.48550/arXiv.1507.00959) -->
 $$
 \begin{equation}
-    \rho_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \xi(x) \tag{3}
+    \rho_{kinetic} = \frac{g_{s}}{2} m_{\chi}^{4} \text{ } \xi(x) \tag{3}
 \end{equation}
 $$
 
@@ -109,7 +109,7 @@ $$
 
 $$
 \begin{equation}
-    P_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \psi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{6}
+    P_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \text{ } \psi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{6}
 \end{equation}
 $$
 
@@ -122,25 +122,25 @@ $$
 
 $$
 \begin{equation}
-    \rho_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \xi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{7}
+    \rho_{total} = \frac{g_{s}}{2} m_{\chi}^{4} \text{ } \xi(x) + \frac{g_{s}^{2} \alpha}{18 \pi^{3}} \frac{m_{\chi}^{3}}{\mu^{2}} x^{6} \tag{7}
 \end{equation}
 $$
 
 With these values calculated, an equation of state has been established for dark matter clumping, which describes the relationship between the pressure density and energy density of dark matter. An example graph of the pressure density and energy density with the following parameters: 
 
-$$m_{\chi} = 1000 \: MeV / c^{2} \qquad m_{\mu} = 10 \, MeV / c^{2} \qquad \alpha = 10^{-3}$$
+$$m_{\chi} = 1000 \text{ } MeV / c^{2} \qquad m_{\mu} = 10 \text{ } MeV / c^{2} \qquad \alpha = 10^{-3}$$
 
 <div style="text-align: center;">
   <img src="results_density_graphs/density_graph chi_1000MeV mu_10MeV alpha_1e-03.png" alt="Pressure and Energy Density Example Graph" style="width: 500; height: auto;">
   <p><strong>Figure 3:</strong> Example Pressure and Energy Density Graph</p>
 </div>
 
-With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star. Within the graph, the total masses are expressed as solar mass multiples, where one solar mass ($M_{\odot}$) is equal to $1.989 \times 10^{30} \, kg$. 
+With an array of corresponding pressure density and energy density values, the Tolman-Oppenheimer-Volkoff equations are solved numerically for each pair of density values. Where pairs of pressure density and energy density values are used as central density values to calculate the mass and radius for that Dark Star. Within the graph, the total masses are expressed as solar mass multiples, where one solar mass ($M_{\odot}$) is equal to $1.989 \times 10^{30} \text{ } kg$. 
 
 This process was repeated for multiple parameter combinations, iterating through the following values:
-- Dark Matter Particle Mass: $[500, 1000, 1500, 2000, 2500, 3000] \, MeV$
-- Field Mediator Mass: $[6, 8, 10, 12] \, MeV$
-- Yukawa Interaction Coupling Strength: $[1 \times 10^{-3}, 5 \times 10^{-4}, 1 \times 10^{-4}]$
+- Dark Matter Particle Mass: $[500, \text{ } 1000, \text{ } 1500, \text{ } 2000, \text{ } 2500, \text{ } 3000] \text{ } MeV$
+- Field Mediator Mass: $[6, \text{ } 8, \text{ } 10, \text{ } 12] \text{ } MeV$
+- Yukawa Interaction Coupling Strength: $[1 \times 10^{-3}, \text{ } 5 \times 10^{-4}, \text{ } 1 \times 10^{-4}]$
 
 These values were chosen based on experimented values within "Dark stars: Gravitational and electromagnetic observables" and further expanded with intermediary values. The maximum Dark Star within each parameter combination was then compared using several heatmaps to identify any ponential trends with respect to changing parameter values. Below are the three different heat maps created using the parameters in this study, each representing a unique Yukawa Interaction Coupling Strength. 
 
