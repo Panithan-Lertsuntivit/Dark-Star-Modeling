@@ -6,7 +6,9 @@ $$\frac{dP}{dr} = - \left(\frac{Gm(r)\rho(r)}{r^{2} c^{2}}\right) \left(1 + \fra
 
 $$\frac{dM}{dr} = 4 \pi r^{2} \rho(r)$$
 
-Started in 2022 under the guidance of Professor William Spinella
+Started in 2022 under the guidance of Professor William Spinella.
+
+Presented at the 2023 UCI Building Bridges Conference. <a href="https://github.com/Panithan-Lertsuntivit/Dark-Star-Modeling/raw/main/Modeling Dark Matter Stars Poster UCI 2023.pdf" target="_blank">[Modeling Dark Matter Stars Poster UCI 2023]</a>
 
 ## Abstract
 Dark matter is an unknown substance that accounts for most of the mass within the universe. Researchers try to understand the properties of dark matter and its interactions with other particles (Bahcall) <a href="https://www.pnas.org/doi/epdf/10.1073/pnas.1516944112" target="_blank">[1]</a>.
